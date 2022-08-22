@@ -209,10 +209,6 @@ CONTAINS
 !  Compute surface O2 gas exchange.
 !
 
-! In ROMS when CPP bulk_fluxes is undefined, cff1 is required to convert wind
-! stress into wind speed. In GoTM, I am not sure whether wind speed is always
-! avialable even when users didn't provide. 
-! cff1=rho0*550.0_r8
          
 ! ROMS also provided another coefficient values to calculate air-sea fluxes: cff2=dtdays*0.251_r8*24.0_r8/100.0_r8
          cff2=d_per_s*0.31_rk*24.0_rk/100.0_rk

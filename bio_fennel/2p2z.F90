@@ -2,11 +2,11 @@
 
 !--------------------------------------------------- 2p2z -------------------------------------------------------
 !
-! This routine is to extend the Fennel et at. (2006) ecosystem model to simulate 2 phytoplankton functional
-! types and 2 zooplankton functional types (Laurent et al 2021)
+! This model is an update version of the biogeochemical model described in Laurent et al., (2021) to include 2 
+! different parameterization schemes of large POC. 
 !
-! Ballast module:
-! A part of large POC is protected from remineralization and fragmentation by minerals, including opal and CaCO3.
+! (1) Ballast scheme:
+! A part of large POC is protected from remineralization by minerals, including opal and CaCO3.
 ! 
 ! Following nemuro model (Kishi et al 2007) and BEC model (Lima et al 2014), the opal is produced by mortality,
 ! grazing, and aggregation of large phytoplankton
@@ -15,19 +15,12 @@
 ! The calcite carbonate (CaCO3) production is modelled as a function of large detritus production following MEDUSA
 ! model (Yool et al 2011). The ratio between calcite and carbon production is dependent on the latitude.
 !
-! In addition, we decrease remineralization rate of large POC toward surface before ramping up it to our defined value
-! at Zref based on Laufkotter et al 2017
-! zfact=min(depth/(depth+Kz) *(Zref+Kz)/Zref, 1.0)
-! rL = rL*zfact
-! Now this effect has been adapted in COBALT model.
+! (2) WLin scheme
+! The sinking velocity of large POC is assumed to increase linearly with the depth
 !
 ! Adapted for GOTM-FABM by Bin Wang on May 2020 in Dalhousie university
 !
 ! references:
-!  Fennel , K., Wilkin, J., Levin, J., Moisan, J., O'Reilly, J., Haidvogel, D., Nitrogen cycling in the Mid
-!      Atlantic Bight and implications for the North Atlantic nitrogen budget: Results from a three-dimensional
-!      model. Global Biogeochemical Cycles 20, GB3007, doi:10.1029/2005GB002456.
-!
 !  Laurent, A., Fennel, K., Kuhn, A.: An observation-based evaluation and ranking of historical Earth system model
 !      simulations in the northwest North Atlantic Ocean, Biogeosciences, 18, 1803–1822,
 !      https://doi.org/10.5194/bg-18-1803-2021, 2021
@@ -40,11 +33,8 @@
 !
 !  Yool, A., Popova, E. E., and Anderson, T. R.: Medusa-1.0: a new intermediate complexity plankton ecosystem model
 !      for the global domain, Geosci. Model Dev., 4, 381–417, https://doi.org/10.5194/gmd-4-381-2011, 2011
-!  
-!  Laufkötter, C., J. G. John, C. A. Stock, and J. P. Dunne (2017), Temperature and oxygen dependence of the
-!      remineralization of organic matter, Global Biogeochem. Cycles, 31, 1038–1050, doi:10.1002/2017GB005643.
 !
-! Please go to this link for more information about GoTM-Fabm coding:
+! Please go to this website for more information about GoTM-Fabm coding:
 ! https://github.com/fabm-model/fabm/wiki/Developing-a-new-biogeochemical-model
 !-----------------------------------------------------------------------------------------------------------------
 
@@ -76,11 +66,6 @@ MODULE memg_bio_fennel_2p2z
       TYPE (type_diagnostic_variable_id) :: id_newPP_Ps,id_newPP_Pl
       
       TYPE (type_diagnostic_variable_id) :: id_fcaco3
-      
-      ! These diagnostic variables were set up here in order to check whether the model can correctly
-      ! simulate source and sink terms. We don't need to setup all of these terms in a real application
-      ! TYPE (type_diagnostic_variable_id) :: id_bio1,id_bio2,id_bio3,id_bio4,id_bio5,id_bio6,id_bio7
-      TYPE (type_diagnostic_variable_id) :: id_bio1
       
       ! Parameters
       real(rk) :: I_thNH4          ! Radiation threshold for nitrification inhibition [Watts/m2]
@@ -524,15 +509,6 @@ CONTAINS
       call self%register_diagnostic_variable(self%id_fcaco3,'fcaco3','mmol Ca/mmol C','Calcite:organic C ratio',   &
          &    standard_variable=type_bulk_standard_variable(name='fcaco3',units='mmol Ca/mmol C'))
          
-      ! These diagnostic variables were set up here in order to check whether the model can correctly
-      ! simulate source and sink terms. We don't need to setup all of these terms in a real application
-      call self%register_diagnostic_variable(self%id_bio1,'bio1',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio2,'bio2',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio3,'bio3',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio4,'bio4',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio5,'bio5',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio6,'bio6',' ','')
-      ! call self%register_diagnostic_variable(self%id_bio7,'bio7',' ','')
 
    return
 
@@ -1215,17 +1191,7 @@ CONTAINS
          _SET_DIAGNOSTIC_(self%id_newPP_Pl,secs_pr_day*N_NewProd_Pl)
          
          _SET_DIAGNOSTIC_(self%id_fcaco3,fcaco3/self%PhyCN)
-         
-         ! for diagnosing the model
-         _SET_DIAGNOSTIC_(self%id_bio1,zfact) 
-         ! _SET_DIAGNOSTIC_(self%id_bio1,secs_pr_day*N_Graz_ZsPl)
-         ! _SET_DIAGNOSTIC_(self%id_bio2,secs_pr_day*N_Graz_ZlPl)
-         ! _SET_DIAGNOSTIC_(self%id_bio3,secs_pr_day*N_Pmortal_Pl)
-         ! _SET_DIAGNOSTIC_(self%id_bio4,secs_pr_day*N_Zlmortal)
-         ! _SET_DIAGNOSTIC_(self%id_bio5,secs_pr_day*N_CoagP)
-         ! _SET_DIAGNOSTIC_(self%id_bio6,secs_pr_day*N_CoagD)
-         ! _SET_DIAGNOSTIC_(self%id_bio7,secs_pr_day*Opal_Dissolve)
-         
+                  
       _LOOP_END_
 
    

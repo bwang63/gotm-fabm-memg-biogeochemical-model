@@ -2,7 +2,7 @@
 
 !------------------------------------------------1p1z model-----------------------------------------------------
 !
-! This routine is a basic 1D version of the Fennel et at. (2006) ecosystem model. The model computes the sources and
+! This model is a basic 1D version of the Fennel et at. (2006) biogeochemical model. The model computes sources and
 ! sinks for 2 nutrient pools (nitrate and ammonia), 1 phytoplankton pool, 1 zooplankton pool, and 2 detritus pools
 ! (large fast sinking detritus and small slow sinking detritus). Chlorophyll is also simulated as an independent
 ! variable. Photoacclimation is allowed based on Geider et al., (1997). 
@@ -41,11 +41,7 @@ MODULE memg_bio_fennel_1p1z
       TYPE (type_diagnostic_variable_id) :: id_newPP,id_regPP
       TYPE (type_diagnostic_variable_id) :: id_graz,id_Pmortal,id_coagP,id_Zmortal,id_Zmetabo,id_Zexcret
       TYPE (type_diagnostic_variable_id) :: id_assim,id_egest,id_coagD,id_remineS,id_remineL,id_nitrifi
-      
-      ! These diagnostic variables were set up here in order to check whether the model can correctly
-      ! simulate source and sink terms. We don't need to setup all of these terms in a real application
-      !TYPE (type_diagnostic_variable_id) :: id_bio1,id_bio2,id_bio3,id_bio4,id_bio5,id_bio6,id_bio7
-      
+            
       ! Parameters
       real(rk) :: attSW            ! PAR attenuation coef due to sea water [m-1]
       real(rk) :: attCHL           ! PAR attenuation coef due to chlorophyll [m-1]
@@ -287,17 +283,6 @@ CONTAINS
          &    standard_variable=type_bulk_standard_variable(name='Nitrifi',units='mmol N m-3 day-1'))
       
       
-      ! These diagnostic variables were set up here in order to check whether the model can correctly
-      ! simulate source and sink terms. We don't need to setup all of these terms in a real application
-      !call self%register_diagnostic_variable(self%id_bio1,'bio1',' ','')
-      !call self%register_diagnostic_variable(self%id_bio2,'bio2',' ','')
-      !call self%register_diagnostic_variable(self%id_bio3,'bio3',' ','')
-      !call self%register_diagnostic_variable(self%id_bio4,'bio4',' ','')
-      !call self%register_diagnostic_variable(self%id_bio5,'bio5',' ','')
-      !call self%register_diagnostic_variable(self%id_bio6,'bio6',' ','')
-      !call self%register_diagnostic_variable(self%id_bio7,'bio7',' ','')
-     
-      
    return
 
 99 call self%fatal_error('memg_bio_fennel_1p1z','Error reading namelist memg_bio_fennel_1p1z.')
@@ -357,25 +342,7 @@ CONTAINS
          
          _GET_(self%id_par,par)
          _GET_HORIZONTAL_(self%id_I_0,I_0)
-         
-         ! These diagnostic variables were set up here in order to check whether the model can correctly
-         ! simulate source and sink terms. We don't need to setup these terms in a real application
-         ! In my case, I firstly used model outputs of these 7 biological variables to do an offline
-         ! calculation of all biological fluxes by a well-calibrated matlab version model. However, the
-         ! difference between the GoTM fluxes and the matlab fluxes, e.g. newPP can be as large as 2%. I
-         ! realized this is because GoTM used concentrations before adding source/sink fluxes while matlab
-         ! used concentrations after that. Therefore, I also set those concentrations before adding source/
-         ! sink fluxes as output. By using these concentrations, the difference in fluxes between GoTM and
-         ! matlab is within 2e-7. That suggested my GoTM version of bio_Fennel model could calculate all source
-         ! and sink terms correctly.
-         !_SET_DIAGNOSTIC_(self%id_bio1,no3)
-         !_SET_DIAGNOSTIC_(self%id_bio2,nh4)
-         !_SET_DIAGNOSTIC_(self%id_bio3,phy)
-         !_SET_DIAGNOSTIC_(self%id_bio4,chl)
-         !_SET_DIAGNOSTIC_(self%id_bio5,zoo)
-         !_SET_DIAGNOSTIC_(self%id_bio6,LDeN)
-         !_SET_DIAGNOSTIC_(self%id_bio7,SDeN)
-         
+                 
          
          IF (I_0 .gt. 0.0_rk) THEN
 !-----------------------------------------------------------------------
