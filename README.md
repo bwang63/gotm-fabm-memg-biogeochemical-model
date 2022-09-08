@@ -1,12 +1,14 @@
 # gotm-fabm-memg-biogeochemical-model
 
-This biogeochemical model is an updated version of the biogeochemical model described in Laurent et al. (2021) and
+This biogeochemical model is an updated version of the biogeochemical model described in Laurent et al. (2021, [doi.org/10.5194/bg-18-1803-2021](https://bg.copernicus.org/articles/18/1803/2021/)) and
 is coupled to General Ocean Turbulence Model ([GoTM](https://gotm.net/portfolio/software/)) through the Framework
 for Aquatic Biogeochemical Models ([FABM](https://github.com/fabm-model/fabm/wiki/Developing-a-new-biogeochemical-model); Bruggeman and Bolding 2014).
 The model is updated to include two different sinking schemes, the ballast scheme and the WLin scheme, which aim to
 reproduce the increase of remineralization length scale with depth by simulating the protection by minerals,
 i.e., CaCO3 and opal, from remineralization and allowing for an increase of sinking velocity, respectively.
-Detailed descriptions of these two schemes follow Wang and Fennel (2022).
+
+This set of code was developed by the [MEMG](https://memg.ocean.dal.ca/) group in Dalhousie University, Canada.
+
 
 ## Step 1: Download the GoTM code
 Go to [GoTM website](https://gotm.net/portfolio/software/), download its source code in your directory ($GOTM_BASE)
@@ -15,7 +17,7 @@ Go to [GoTM website](https://gotm.net/portfolio/software/), download its source 
 Download the biogeochemical model code from this repository, rename the folder to be 'memg', and put it under the directory `$GOTM_BASE/extern/fabm/src/models` 
 
 ## Step 3: Making FABM aware of the new biogeochemical model
-Open the master configuration file '$GOTM_BASE/extern/fabm/src/CMakeLists.txt' and add our institude into this file. 
+Open the master configuration file '$GOTM_BASE/extern/fabm/src/CMakeLists.txt' and add our institude (MEMG) into this file. 
 ```
 # List of contributing institutes that should be included in compilation.
 # When adding new institutes to the source tree, please add them here as well.
