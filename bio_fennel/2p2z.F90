@@ -3,7 +3,7 @@
 !--------------------------------------------------- 2p2z -------------------------------------------------------
 !
 ! This model is an update version of the biogeochemical model described in Laurent et al., (2021) to include 2 
-! different parameterization schemes of large POC. 
+! different parameterization schemes of large detritus. 
 !
 ! (1) Ballast scheme:
 ! A part of large POC is protected from remineralization by minerals, including opal and CaCO3.
@@ -113,11 +113,6 @@ MODULE memg_bio_fennel_2p2z
       real(rk) :: FragRN           ! Large detritus fragmentation rate N-fraction [1/day]
       real(rk) :: SDeRRN           ! Small detritus remineralization rate N-fraction [1/day]
       real(rk) :: CoagR            ! Coagulation rate: aggregation rate of SDeN + Phy ==> LDeN [1/day]
-      ! real(rk) :: wP               ! Sinking velocity of phytoplankton [m/day]
-      ! real(rk) :: wPS              ! Sinking velocity of small phytoplankton [m/day]
-      ! real(rk) :: wPL              ! Sinking velocity of large phytoplankton [m/day]
-      ! real(rk) :: wL               ! Sinking velocity of large detritus [m/day]
-      ! real(rk) :: wS               ! Sinking velocity of small detritus [m/day]
       real(rk) :: OpalPR           ! Opal protection ratio [mmol N/mmol Si]
       real(rk) :: OpalDR           ! Opal dissolution rate Si-fraction [1/day]
       real(rk) :: fcaco3_0         ! Equatorial Calcite:organic C ratio [mmol Ca/mmol C]
@@ -218,11 +213,6 @@ CONTAINS
       real(rk) :: FragRN           ! Large detritus fragmentation rate N-fraction [1/day]
       real(rk) :: SDeRRN           ! Small detritus remineralization rate N-fraction [1/day]
       real(rk) :: CoagR            ! Coagulation rate: aggregation rate of SDeN + Phy ==> LDeN [1/day]
-      ! real(rk) :: wP               ! Sinking velocity of phytoplankton [m/day]
-      ! real(rk) :: wPS              ! Sinking velocity of small phytoplankton [m/day]
-      ! real(rk) :: wPL              ! Sinking velocity of large phytoplankton [m/day]
-      ! real(rk) :: wL               ! Sinking velocity of large detritus [m/day]
-      ! real(rk) :: wS               ! Sinking velocity of small detritus [m/day]
       real(rk) :: OpalPR           ! Opal protection ratio [mmol N/mmol Si]
       real(rk) :: OpalDR           ! Opal dissolution rate Si-fraction [1/day]
       real(rk) :: fcaco3_0         ! Equatorial Calcite:organic C ratio [mmol Ca/mmol C]
@@ -334,11 +324,6 @@ CONTAINS
       FragRN = 0.01_rk
       SDeRRN = 0.4_rk          
       CoagR = 0.0023_rk
-      ! wP  = 0.1_rk
-      ! wPS = 0.1_rk              
-      ! wPL = 0.5_rk             
-      ! wL = 5.0_rk              
-      ! wS = 0.1_rk
       OpalPR = 0.02_rk
       OpalDR = 0.0225_rk
       fcaco3_0 = 0.10_rk
@@ -403,11 +388,6 @@ CONTAINS
       call self%get_parameter(self%FragRN,'FragRN','d-1','Large detritus fragmentation rate N-fraction',default=FragRN)
       call self%get_parameter(self%SDeRRN,'SDeRRN','d-1','Small detritus remineralization rate N-fraction',default=SDeRRN)
       call self%get_parameter(self%CoagR,'CoagR','d-1','Coagulation rate: aggregation rate of SDeN + Phy ==> LDeN',default=CoagR)
-      ! call self%get_parameter(self%wP,'wP','m d-1','Sinking velocity of small phytoplankton (<0 for sinking)',default=wP,scale_factor=-1.0_rk*d_per_s)
-      ! call self%get_parameter(self%wPS,'wPS','m d-1','Sinking velocity of small phytoplankton (<0 for sinking)',default=wPS,scale_factor=-1.0_rk*d_per_s)
-      ! call self%get_parameter(self%wPL,'wPL','m d-1','Sinking velocity of large phytoplankton (<0 for sinking)',default=wPL,scale_factor=-1.0_rk*d_per_s)
-      ! call self%get_parameter(self%wL,'wL','m d-1','Sinking velocity of large detritus (<0 for sinking)',default=wL,scale_factor=-1.0_rk*d_per_s)
-      ! call self%get_parameter(self%wS,'wS','m d-1','Sinking velocity of samll detritus (<0 for sinking)',default=wS,scale_factor=-1.0_rk*d_per_s)
       call self%get_parameter(self%OpalPR,'OpalPR','mmol N/mmol Si','Opal protection ratio',default=OpalPR)
       call self%get_parameter(self%OpalDR,'OpalDR','d-1','Opal dissolution rate Si-fraction',default=OpalDR)
       call self%get_parameter(self%fcaco3_0,'fcaco3_0','mmol Ca/mmol C','Equatorial Calcite:organic C ratio',default=fcaco3_0)

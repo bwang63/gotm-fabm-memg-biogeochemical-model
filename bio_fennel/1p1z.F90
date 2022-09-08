@@ -2,10 +2,10 @@
 
 !------------------------------------------------1p1z model-----------------------------------------------------
 !
-! This model is a basic 1D version of the Fennel et at. (2006) biogeochemical model. The model computes sources and
-! sinks for 2 nutrient pools (nitrate and ammonia), 1 phytoplankton pool, 1 zooplankton pool, and 2 detritus pools
-! (large fast sinking detritus and small slow sinking detritus). Chlorophyll is also simulated as an independent
-! variable. Photoacclimation is allowed based on Geider et al., (1997). 
+! This model is a basic 1D version of the Fennel et at. (2006) biogeochemical model. The model calculate sources 
+! and sinks for 2 nutrient pools (nitrate and ammonia), 1 phytoplankton pool, 1 zooplankton pool, and 2 detritus 
+! pools(large fast sinking detritus and small slow sinking detritus). Chlorophyll is also simulated as an 
+! independent variable. Photoacclimation is allowed based on Geider et al., (1997). 
 !
 ! Developed by KF
 ! Adapted for GOTM-FABM by BW on May 2020 in Dalhousie university
