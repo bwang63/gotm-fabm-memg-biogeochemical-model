@@ -1,14 +1,13 @@
 # gotm-fabm-memg-biogeochemical-model
 
-This biogeochemical model is an updated version of the biogeochemical model described in Laurent et al. (2021, [doi.org/10.5194/bg-18-1803-2021](https://bg.copernicus.org/articles/18/1803/2021/)) and
-is coupled to General Ocean Turbulence Model ([GoTM](https://gotm.net/portfolio/software/)) through the Framework
-for Aquatic Biogeochemical Models ([FABM](https://github.com/fabm-model/fabm/wiki/Developing-a-new-biogeochemical-model); Bruggeman and Bolding 2014).
+This biogeochemical model is an updated version of the biogeochemical model described in Laurent et al. (2021, [doi.org/10.5194/bg-18-1803-2021](https://bg.copernicus.org/articles/18/1803/2021/))
+and is coupled to General Ocean Turbulence Model ([GoTM](https://gotm.net/portfolio/software/)) through the Framework
+for Aquatic Biogeochemical Models ([FABM](https://github.com/fabm-model/fabm/wiki/Developing-a-new-biogeochemical-model); Bruggeman and Bolding 2014). 
 The model is updated to include two different sinking schemes, the ballast scheme and the WLin scheme, which aim to
 reproduce the increase of remineralization length scale with depth by simulating the protection by minerals,
 i.e., CaCO3 and opal, from remineralization and allowing for an increase of sinking velocity, respectively.
 
-This set of code was developed by the [MEMG](https://memg.ocean.dal.ca/) group in Dalhousie University, Canada.
-
+This set of code was developed by the [MEMG](https://memg.ocean.dal.ca/) group in Dalhousie University, Canada, and based on the GoTM version v6.0.0 and FABM v1.0.3
 
 ## Step 1: Download the GoTM code
 Go to [GoTM website](https://gotm.net/portfolio/software/), download its source code in your directory ($GOTM_BASE)
