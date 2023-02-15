@@ -1,6 +1,6 @@
 # gotm-fabm-memg-biogeochemical-model
 
-This biogeochemical model (Wang and Fennel. 2023 [10.1029/2022GL101220](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL101220)) is an updated version of the biogeochemical model described in Laurent et al. (2021, [10.5194/bg-18-1803-2021](https://bg.copernicus.org/articles/18/1803/2021/))
+This biogeochemical model (Wang and Fennel. 2023, [10.1029/2022GL101220](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022GL101220)) is an updated version of the biogeochemical model described in Laurent et al. (2021, [10.5194/bg-18-1803-2021](https://bg.copernicus.org/articles/18/1803/2021/))
 and is coupled to General Ocean Turbulence Model ([GoTM](https://gotm.net/portfolio/software/)) through the Framework
 for Aquatic Biogeochemical Models ([FABM](https://github.com/fabm-model/fabm/wiki/Developing-a-new-biogeochemical-model); Bruggeman and Bolding 2014). 
 The model is updated to include two different sinking schemes, the ballast scheme and the WLin scheme, which aim to
