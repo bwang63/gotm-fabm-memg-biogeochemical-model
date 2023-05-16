@@ -79,3 +79,14 @@ compiler=${compiler:=gfortran}
 ```
 $GOTM_BASE/scripts/linux/gotm_build.sh 
 ```
+
+## Compile the model without changing the source code of GOTM and FABM
+The biological model can also be compiled without changing the source code by
+```
+mkdir build
+cd build
+cmake <GOTM_DIR> -DFABM_INSTITUTES=memg -DFABM_MEMG_BASE=<MEMG_DIR>
+make install
+```
+
+In this case, the step 3 and 4 can be skipped. Details please see [FABM website](https://github.com/fabm-model/fabm/wiki/Biogeochemical-models-in-FABM)
